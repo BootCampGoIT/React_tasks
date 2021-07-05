@@ -9,7 +9,8 @@ export const registration = async (user) => {
     );
     return response.data;
   } catch (error) {
-    return error;
+    const newError = error.response.data.error.message;
+    throw newError;
   }
 };
 export const login = async (user) => {
@@ -20,6 +21,7 @@ export const login = async (user) => {
     );
     return response.data;
   } catch (error) {
-    return error;
+    const newError = error.response.data.error.message;
+    throw newError;
   }
 };

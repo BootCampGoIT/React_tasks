@@ -6,7 +6,7 @@ export const registerOperation = (user) => async (dispatch) => {
     const response = await registration(user);
     dispatch(registerUser(response));
   } catch (error) {
-    dispatch(setError(error.message));
+    dispatch(setError(error));
   }
 };
 export const loginOperation = (user) => async (dispatch) => {
@@ -14,6 +14,6 @@ export const loginOperation = (user) => async (dispatch) => {
     const response = await login(user);
     dispatch(loginUser(response));
   } catch (error) {
-    dispatch(setError(error.message));
+    dispatch(setError(error));
   }
 };
