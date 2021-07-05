@@ -23,7 +23,7 @@ const Filter = ({ filter, setFilter }) => {
           type='text'
           value={filter}
           onChange={onHandleFilter}
-          placeholder='Enter product name'
+          placeholder='Enter search params'
           className='filterInput'
         />
       </label>

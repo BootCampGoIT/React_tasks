@@ -1,12 +1,10 @@
 import axios from "axios";
-import  { setLoader } from '../redux/products/productsActions'
-import store from '../redux/store'
-const baseURL = "https://reactmaps-1556023014107-default-rtdb.firebaseio.com/";
+
 
 export const createNewAdv = async (category, newAdv) => {
   try {
     const response = await axios.post(
-      baseURL + `advertisements/${category}.json`,
+      process.env.REACT_APP_BASE_URL + `advertisements/${category}.json`,
       newAdv
     );
     return response;
@@ -15,10 +13,10 @@ export const createNewAdv = async (category, newAdv) => {
   }
 };
 export const getProductByID = async (category, id) => {
-  console.log("id :>> ", id);
+
   try {
     const response = await axios.get(
-      baseURL + `advertisements/${category}/${id}.json`
+      process.env.REACT_APP_BASE_URL + `advertisements/${category}/${id}.json`
     );
     return response.data;
   } catch (error) {
@@ -28,7 +26,7 @@ export const getProductByID = async (category, id) => {
 
 export const deleteAdv = async (category, id) => {
   try {
-    await axios.delete(baseURL + `advertisements/${category}/${id}.json`);
+    await axios.delete(process.env.REACT_APP_BASE_URL + `advertisements/${category}/${id}.json`);
   } catch (error) {
     console.log(error);
   }
@@ -36,7 +34,7 @@ export const deleteAdv = async (category, id) => {
 
 export const createNewOrder = async (order) => {
   try {
-    await axios.post(baseURL + "orders.json", order);
+    await axios.post(process.env.REACT_APP_BASE_URL + "orders.json", order);
   } catch (error) {
     console.log(error);
   }
@@ -45,7 +43,7 @@ export const createNewOrder = async (order) => {
 export const getAllAdvByCategory = async (category) => {
   try {
     const response = await axios.get(
-      baseURL + `advertisements/${category}.json`
+      process.env.REACT_APP_BASE_URL + `advertisements/${category}.json`
     );
     return response.data;
   } catch (error) {
