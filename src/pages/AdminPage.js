@@ -2,11 +2,11 @@ import React from "react";
 import Section from "../Components/section/Section";
 import AdvForm from "../Components/admin/AdvForm";
 
-const AdminPage = ({ data }) => {
+const AdminPage = () => {
   return (
     <>
       <Section title='Administration'>
-        <AdvForm addNewAdv={data.addNewAdv} />
+        <AdvForm />
       </Section>
     </>
   );

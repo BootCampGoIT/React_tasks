@@ -2,14 +2,10 @@ import React from "react";
 import CartList from "../Components/cart/CartList";
 import Section from "../Components/section/Section";
 
-const CartPage = ({ data: { cart, removeFromCart, createOrder } }) => {
+const CartPage = ({ icon }) => {
   return (
-    <Section title='Cart'>
-      <CartList
-        cart={cart}
-        removeFromCart={removeFromCart}
-        createOrder={createOrder}
-      />
+    <Section title='Cart' icon={icon}>
+      <CartList />
     </Section>
   );
 };

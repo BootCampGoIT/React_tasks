@@ -6,6 +6,7 @@ const createOrder = createAction("cart/createOrder");
 const setLoader = createAction("cart/setLoader");
 const setError = createAction("cart/setError");
 const resetError = createAction("cart/resetError");
+const setCartFilter = createAction("cart/setCartFilter");
 
 export {
   addToCart,
@@ -14,6 +15,7 @@ export {
   setLoader,
   setError,
   resetError,
+  setCartFilter
 };
 
 // ================= redux ======================

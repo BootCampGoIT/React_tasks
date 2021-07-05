@@ -118,9 +118,3 @@ class AdvForm extends Component {
 
 export default AdvForm;
 
-const arr = [
-  [100, 200],
-  [300, 500],
-];
-const [, [, y2]] = arr;
-console.log(y2);

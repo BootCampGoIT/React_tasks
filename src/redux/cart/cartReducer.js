@@ -6,6 +6,7 @@ import {
   resetError,
   setError,
   setLoader,
+  setCartFilter,
 } from "./cartActions";
 
 const cartItemsReducer = createReducer([], {
@@ -25,10 +26,15 @@ const cartErrorReducer = createReducer("", {
   [resetError]: () => "",
 });
 
+const cartFilterReducer = createReducer("", {
+  [setCartFilter]: (_, action) => action.payload,
+});
+
 const cartReducer = combineReducers({
   items: cartItemsReducer,
   loader: cartLoaderReducer,
   error: cartErrorReducer,
+  filter: cartFilterReducer,
 });
 
 export default cartReducer;

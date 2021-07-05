@@ -6,6 +6,14 @@ import { setPhones } from "../../redux/products/productsActions";
 
 import { addToCart } from "../../redux/cart/cartActions";
 import { getAllAdvByCategoryOperation } from "../../redux/products/productsOperations";
+import LoaderComponent from "../loader/Loader";
+import {
+  filteredProducts,
+  loadingSelector,
+  phonesSelector,
+  productsSelector,
+} from "../../redux/products/productsSelectors";
+import Filter from "../filter/Filter";
 
 class PhoneList extends Component {
   componentDidMount() {
@@ -14,22 +22,32 @@ class PhoneList extends Component {
 
   render() {
     return (
-      <PhoneListContainer>
-        {this.props.phones.map((phone) => (
-          <PhoneListItem
-            phone={phone}
-            key={phone.id}
-            addToCart={this.props.addToCart}
-          />
-        ))}
-      </PhoneListContainer>
+      <>
+        <Filter name='products' />
+        <PhoneListContainer>
+          {this.props.isLoading ? (
+            <LoaderComponent />
+          ) : (
+            <>
+              {this.props.phones.map((phone) => (
+                <PhoneListItem
+                  phone={phone}
+                  key={phone.id}
+                  addToCart={this.props.addToCart}
+                />
+              ))}
+            </>
+          )}
+        </PhoneListContainer>
+      </>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    phones: state.products.items.phones,
+    phones: filteredProducts(state, "phones"),
+    isLoading: loadingSelector(state),
   };
 };
 

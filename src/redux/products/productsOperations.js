@@ -1,7 +1,24 @@
 import axios from "axios";
-import { getAllAdvByCategory } from "../../services/api";
-import { setError, setLaptops, setLoader, setPhones } from "./productsActions";
+import { getAllAdvByCategory, getProductByID } from "../../services/api";
+import {
+  getDetailsByProductID,
+  setError,
+  setLaptops,
+  setLoader,
+  setPhones,
+} from "./productsActions";
 
+export const getProductByIDOperation =
+  (category, productID) => async (dispatch) => {
+    try {
+      const res = await getProductByID(category, productID);
+      dispatch(getDetailsByProductID(res));
+    } catch (error) {
+      console.log("error :>> ", error);
+    }
+  };
+
+// =============================
 const getAction = (category, products, dispatch) => {
   if (category === "phones") {
     dispatch(setPhones(products));
@@ -29,4 +46,3 @@ export const getAllAdvByCategoryOperation = (category) => async (dispatch) => {
     dispatch(setLoader());
   }
 };
-

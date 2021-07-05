@@ -1,10 +1,12 @@
 import { createReducer, combineReducers } from "@reduxjs/toolkit";
 import {
+  getDetailsByProductID,
   resetError,
   setError,
   setLaptops,
   setLoader,
   setPhones,
+  setProductFilter
 } from "./productsActions";
 
 const productItemsReducer = createReducer(
@@ -29,10 +31,24 @@ const productsErrorReducer = createReducer("", {
   [resetError]: () => "",
 });
 
+const currentProductReducer = createReducer(
+  {},
+  {
+    [getDetailsByProductID]: (_, action) => ({
+      ...action.payload,
+    }),
+  }
+);
+const productsFilterReducer = createReducer("", {
+  [setProductFilter]: (_, action) => action.payload,
+});
+
 const productsReducer = combineReducers({
-  items: productItemsReducer,
+  categories: productItemsReducer,
   loader: productsLoaderReducer,
   error: productsErrorReducer,
+  currentProduct: currentProductReducer,
+  filter: productsFilterReducer
 });
 
 export default productsReducer;

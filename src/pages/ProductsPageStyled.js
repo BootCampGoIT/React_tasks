@@ -4,10 +4,11 @@ export const ProductsPageContainer = styled.div`
   .navigationList {
     list-style: none;
     display: flex;
+    border-bottom: 2px solid #819ff5;
+    padding-left: 20px;
   }
   .navigationListItem {
     padding: 10px 0;
-    margin-top: 10px;
   }
   .navigationListItemAnchor {
     text-decoration: none;
@@ -24,6 +25,7 @@ export const ProductsPageContainer = styled.div`
   @media (min-width: 768px) {
     .navigationList {
       flex-direction: row;
+
       width: 100%;
       background-color: inherit;
       margin-top: 0;

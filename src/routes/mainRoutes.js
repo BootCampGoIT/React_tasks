@@ -18,6 +18,7 @@ export const mainRoutes = [
     path: "/cart",
     component: lazy(() => import("../pages/CartPage")),
     exact: true,
+    icon: "#icon-cart",
   },
   {
     name: "Administration",

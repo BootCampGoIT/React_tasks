@@ -1,17 +1,18 @@
 import axios from "axios";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getProductByID } from "../services/api";
 import { ProductDetailsContainer } from "./ProductItemDetailsStyled";
+import { getProductByIDOperation } from "../redux/products/productsOperations";
+import { currentProductSelector } from "../redux/products/productsSelectors";
 
 class ProductItemDetails extends Component {
-  state = { laptop: null };
   async componentDidMount() {
-    const res = await getProductByID(
+    this.props.getProductByIDOperation(
       this.props.match.params.category,
       this.props.match.params.productID
     );
-    this.setState({ laptop: res });
   }
 
   goBack = () => {
@@ -21,31 +22,31 @@ class ProductItemDetails extends Component {
       this.props.history.push(`/products/${this.props.match.params.category}`);
   };
   render() {
-    const { laptop } = this.state;
+    const { product } = this.props;
     return (
       <ProductDetailsContainer>
         <button className='goBack' onClick={this.goBack}>
           Go back
         </button>
-        {laptop && (
+        {product && (
           <div className='content'>
-            <h3 className='listItemTitle'>{laptop.name}</h3>
+            <h3 className='listItemTitle'>{product.name}</h3>
             <div className='imageWrapper'>
               <img
-                src={laptop.image}
-                alt={laptop.name}
+                src={product.image}
+                alt={product.name}
                 className='listItemImage'
               />
             </div>
-            <p className='description'>{laptop.description}</p>
+            <p className='description'>{product.description}</p>
             <p className='priceTitle'>
-              {laptop.isSale ? (
+              {product.isSale ? (
                 <>
-                  <span className='withSalePrice'>{laptop.price - 1000}</span>{" "}
-                  <span className='withoutSalePrice'>{laptop.price}</span>
+                  <span className='withSalePrice'>{product.price - 1000}</span>{" "}
+                  <span className='withoutSalePrice'>{product.price}</span>
                 </>
               ) : (
-                <span className='withoutSalePrice'>{laptop.price}</span>
+                <span className='withoutSalePrice'>{product.price}</span>
               )}
               {" грн"}
             </p>
@@ -56,4 +57,12 @@ class ProductItemDetails extends Component {
   }
 }
 
-export default withRouter(ProductItemDetails);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    product: currentProductSelector(state),
+  };
+};
+
+export default connect(mapStateToProps, { getProductByIDOperation })(
+  withRouter(ProductItemDetails)
+);

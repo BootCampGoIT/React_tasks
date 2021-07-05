@@ -35,11 +35,7 @@ const ProductsPage = ({ match, data, history }) => {
                 key={path}
                 path={match.path + path}
                 exact={exact}
-                render={() => (
-                  <Section title={name}>
-                    <MyComponent {...data} />
-                  </Section>
-                )}
+                render={() => <MyComponent {...data} />}
               />
             )
           )}

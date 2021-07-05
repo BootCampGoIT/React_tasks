@@ -23,6 +23,14 @@ export const CartListContainerWrapper = styled.div`
   }
   .orderButton {
     margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .checkoutIcon {
+    width: 20px;
+    height: 20px;
+    fill: #ffffff;
+    margin-right: 10px;
   }
   @media (min-width: 768px) {
   }
