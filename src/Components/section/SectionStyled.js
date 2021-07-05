@@ -23,6 +23,7 @@ export const SectionContainer = styled.div`
   }
   .sectionContent {
     padding: 20px;
+    width: 100%;
   }
 
   @media (min-width: 768px) {
