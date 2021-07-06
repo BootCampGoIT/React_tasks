@@ -33,7 +33,10 @@ const CartList = ({ cart, removeFromCartByID, createOrder }) => {
                 {getTotalPrice()} <span className='totalInfoTitle'>UAH</span>
               </p>
             </div>
-            <button type='button' onClick={createOrder} className='orderButton'>
+            <button
+              type='button'
+              onClick={() => createOrder()}
+              className='orderButton'>
               <svg className='checkoutIcon'>
                 <use href={sprite + "#icon-credit-card"} />
               </svg>

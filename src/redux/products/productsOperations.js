@@ -1,4 +1,3 @@
-import axios from "axios";
 import { getAllAdvByCategory, getProductByID } from "../../services/api";
 import {
   getDetailsByProductID,

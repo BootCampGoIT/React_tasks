@@ -1,8 +1,8 @@
-import axios from "axios";
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getProductByID } from "../services/api";
+
 import { ProductDetailsContainer } from "./ProductItemDetailsStyled";
 import { getProductByIDOperation } from "../redux/products/productsOperations";
 import { currentProductSelector } from "../redux/products/productsSelectors";

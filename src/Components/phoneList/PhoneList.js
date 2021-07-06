@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PhoneListItem from "./phoneListItem/PhoneListItem";
 import { PhoneListContainer } from "./PhoneListStyled";
 import { connect } from "react-redux";
-import { setPhones } from "../../redux/products/productsActions";
 
 import { addToCart } from "../../redux/cart/cartActions";
 import { getAllAdvByCategoryOperation } from "../../redux/products/productsOperations";
@@ -10,8 +9,6 @@ import LoaderComponent from "../loader/Loader";
 import {
   filteredProducts,
   loadingSelector,
-  phonesSelector,
-  productsSelector,
 } from "../../redux/products/productsSelectors";
 import Filter from "../filter/Filter";
 

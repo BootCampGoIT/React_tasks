@@ -6,9 +6,11 @@ export const ProductsPageContainer = styled.div`
     display: flex;
     border-bottom: 2px solid #819ff5;
     padding-left: 20px;
+    height: 40px;
+    align-items: center;
   }
   .navigationListItem {
-    padding: 10px 0;
+    /* padding: 10px 0; */
   }
   .navigationListItemAnchor {
     text-decoration: none;

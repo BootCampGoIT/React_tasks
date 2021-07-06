@@ -1,5 +1,5 @@
 import React from "react";
-import { ColorItemLI, ListItemContainer } from "./PhoneListItemStyled";
+import { ListItemContainer } from "./PhoneListItemStyled";
 import { withRouter } from "react-router-dom";
 
 const PhoneListItem = ({ phone, addToCart, history, match, location }) => {
@@ -20,11 +20,7 @@ const PhoneListItem = ({ phone, addToCart, history, match, location }) => {
           <img src={phone.image} alt={phone.name} className='listItemImage' />
         </div>
 
-        {/* <ul className='colorsList'>
-          {phone.colors.map((color) => (
-            <ColorItemLI key={color} color={color} />
-          ))}
-        </ul> */}
+
         <p className='priceTitle'>
           {phone.isSale ? (
             <>
@@ -40,7 +36,7 @@ const PhoneListItem = ({ phone, addToCart, history, match, location }) => {
         </p>
         <div className='options'>
           <button
-            onClick={addProduct}
+
             className='detailsButton'
             onClick={openDetails}>
             Details

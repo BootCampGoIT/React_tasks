@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { AdvFormContainer } from "./AdvFormStyled";
-import { v4 as uuidv4 } from "uuid";
 import { createNewAdv } from "../../services/api";
 
 const productCategories = ["phones", "laptops"];

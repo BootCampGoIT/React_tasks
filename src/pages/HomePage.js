@@ -1,6 +1,8 @@
 import React from "react";
+import Section from "../Components/section/Section";
+
 const HomePage = () => {
-  return <h2>HomePage</h2>;
+  return <Section title='HomePage'></Section>;
 };
 
 export default HomePage;

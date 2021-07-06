@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from "react";
 import { productsRoutes } from "../routes/productsRoutes";
 import { NavLink, Route, Switch } from "react-router-dom";
 import { ProductsPageContainer } from "./ProductsPageStyled";
-import Section from "../Components/section/Section";
+
 
 const ProductsPage = ({ match, data, history }) => {
   useEffect(() => {

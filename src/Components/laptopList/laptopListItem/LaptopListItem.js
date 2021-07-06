@@ -32,10 +32,7 @@ const LaptopListItem = ({ laptop, addToCart, history, match, location }) => {
           {" UAH"}
         </p>
         <div className='options'>
-          <button
-            onClick={addProduct}
-            className='detailsButton'
-            onClick={openDetails}>
+          <button className='detailsButton' onClick={openDetails}>
             Details
           </button>
           <button onClick={addProduct} className='addToCartButton'>

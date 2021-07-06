@@ -1,40 +1,30 @@
-import { configureStore } from "@reduxjs/toolkit";
-import axios from "axios";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+
 import rootReducer from "./rootReducer";
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
-// const myMiddleware = (store) => (next) => (action) => {
-//   if (action.type === "@products/getDetailsByID") {
-//     axios.post(
-//       "https://reactmaps-1556023014107-default-rtdb.firebaseio.com/popular.json",
-//       { category: action.payload }
-//     );
-//   }
-//   //   const action = {
-//   //       type: "@products/getDetailsByID",
-//   //       payload: {...}
-//   //   }
-
-//   const newAction = {
-//     ...action,
-//     payload: { ...action.payload, popular: "dasdasdasd" },
-//   };
-
-//   return next(newAction);
-// };
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+];
 
 const store = configureStore({
   reducer: rootReducer,
-  //   middleware: (getDefaultMiddleware) =>
-  //     getDefaultMiddleware().concat(myMiddleware),
+  middleware,
+  devTools: process.env.NODE_ENV === "development",
 });
 
+persistStore(store);
+
 export default store;
-
-// ========================= redux =========================
-// import { createStore } from "redux";
-// import rootReducer from "./rootReducer";
-// import { composeWithDevTools } from "redux-devtools-extension";
-
-// const store = createStore(rootReducer, composeWithDevTools());
-
-// export default store;

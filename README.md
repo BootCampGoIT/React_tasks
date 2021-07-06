@@ -1,177 +1,147 @@
-# lesson: "Authorization";
+# lesson: "Auth_navigation";
 
-    1. Создание формы регистрации (авторизации)
-        - создайте стандартную форму для сбора данных пользователя.
-            Стейт должен содержать два свойства: email и password
+    1. Создание приватных и ограниченных роутов.
+        - Модифицируйте массив mainRoutes таким образом, чтобы в нем было разделение роутов на приватные (не приватные) и ограниченные роуты путем добавления соответствующих булевых значений.
+            Приватные роуты: "Administration"
+            Публичные роуты: "Home", "Products", "Cart",
+            Ограниченные: "Registration", "Login"
 
-            Пример:
+    2. Создание персистора значений idToken и refreshToken
+        - проинсталируйте redux-persist
 
-            import React, { Component } from "react";
-            import { AuthFormContainer } from "./AuthFormStyled";
+             npm i redux-persist
 
-            class AuthForm extends Component {
-            state = {
-                email: "",
-                password: "",
-            };
-            onHandleChange = (e) => {
-                const { name, value } = e.target;
-                this.setState({ [name]: value });
-            };
-            onHandleSubmit = (e) => {
-                e.preventDefault();
-            };
-            render() {
-                return (
-                <AuthFormContainer>
-                    <form className='authForm' onSubmit={this.onHandleSubmit}>
-                    <label className='authFormLabel'>
-                    Email
-                        <input
-                        type='text'
-                        className='authFormInput'
-                        name='email'
-                        onChange={this.onHandleChange}
-                        />
-                    </label>
-                    <label className='authFormLabel'>
-                    Password
-                        <input
-                        type='text'
-                        className='authFormInput'
-                        name='password'
-                        onChange={this.onHandleChange}
-                        />
-                    </label>
-                    <button className='authFormSubmitter' type='submit'></button>
-                    </form>
-                </AuthFormContainer>
-                );
-            }
-            }
+        - следуя официальной документации, произведите необходимые действия в отношении значений idToken и refreshToken в authReducer
 
-            export default AuthForm;
+    3. Создание экшена, предназначенного для разлогинивания пользователя, и удаление соответствующих значений в authReducer
 
-        - компонент должен быть универсальным, поэтому необходимо,
-            чтобы текст кнопки был либо "SIGN UP", либо "SIGN IN".
-            Для реализации данного функционала можно использовать
-            текущее значение location.pathname. Также компонент
-            будет отправлять разные запросы. Поэтому, по событию
-            onSubmit логично тоже делать подобную проверку и
-            вызывать соответствующую операцию. Получить значение
-            location можно используя withRouter из библиотеки react-router-dom
+    3. Обеспечение работспособности роутов навигации в соотвествии с соответствующими значениями приватных, публичных и органиченных роутов.
 
+        - Передайте в HeaderList следующие пропы:
+            -- значение isAuth, как результат работы селектора, который определяет наличие в глобальном стейте значения idToken.
+            -- экшен, который отвечает за разлогинивание пользователя.
 
-    2. Настройка платформы Firebase. Создание запросов для регистрации (авторизации) пользователя.
-        - следуя инструкциям ментора выполните настройку платформы
-        - в папке services создайте файл auth_api.js
-        - создайте две асинхронные функции (registration и login), которые будут использовать конструкцию try/catch и будут выполнять отправку данных (метод POST), необходимых для регистрации (авторизации). Примеры запросов
-        необходимо взять из документации firebase (следуйте инструкциям ментора)
+        - Создайте отдельный компонент HeaderListItem. Перенесите в него логику создания элемента навигации. Передайте в него соотвествующие пропы.
+
+        - В соотвествии с флагами приватных, публичных и ограниченных роутов создайте в компоненте HeaderListItem соответствующие элементы навигации.
 
             Пример:
 
-            import axios from "axios";
-            const API_KEY = "AIzaSyATLDI5y-9PDjVk3Ar5YK476ZnTDxOm0TI";
+                <>
+                    {!isPrivate && !isRestricted && (
+                        <li className='navigationListItem' key={route.path}>
+                        <NavLink
+                            to={path}
+                            exact={exact}
+                            className='navigationListItemAnchor'
+                            activeClassName='navigationListItemActive'
+                            onClick={hideModal}>
+                            {name}
+                        </NavLink>
+                        </li>
+                    )}
+                    {!isAuth && isRestricted && !isPrivate && (
+                        <li className='navigationListItem' key={route.path}>
+                        <NavLink
+                            to={path}
+                            exact={exact}
+                            className='navigationListItemAnchor'
+                            activeClassName='navigationListItemActive'
+                            onClick={hideModal}>
+                            {name}
+                        </NavLink>
+                        </li>
+                    )}
+                    {isPrivate && isAuth && (
+                        <li className='navigationListItem' key={route.path}>
+                        <NavLink
+                            to={path}
+                            exact={exact}
+                            className='navigationListItemAnchor'
+                            activeClassName='navigationListItemActive'
+                            onClick={hideModal}>
+                            {name}
+                        </NavLink>
+                        </li>
+                    )}
+                </>
 
-            export const registration = async (user) => {
-            try {
-                const response = await axios.post(
-                `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
-                { ...user, returnSecureToken: true }
-                );
-                return response.data;
-            } catch (error) {
-                return error;
-            }
+        - в компоненте HeaderList создайте элемент, который будет отвечать за разлогинивание пользователя используя экшен, переданный в пропах. Действие производить при событии onClick
+
+        - проверьте работоспособность элементов навигации
+
+    4. Создание компонентов PrivateRoute и PublicRoute.
+
+        - создайте компонент PrivateRoute который рендерит соответсвующий приватный роут в зависимости от значения isAuth.
+        Если значение isAuth равно false, то должен происходить редирект на ограниченный роут '/login'. Если true, то рендерится компонент.
+
+            Пример PrivateRoute:
+
+            import React from "react";
+            import { Redirect, Route } from "react-router-dom";
+
+            const PrivateRoute = ({
+            exact,
+            path,
+            component: MyComponent,
+            isAuth,
+            icon,
+            }) => {
+            return !isAuth ? (
+                <Redirect to='/login' />
+            ) : (
+                <Route
+                path={path}
+                exact={exact}
+                render={(props) => <MyComponent {...props} icon={icon} />}
+                key={path}
+                />
+            );
             };
-            export const login = async (user) => {
-            try {
-                const response = await axios.post(
-                `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
-                { ...user, returnSecureToken: true }
-                );
-                return response.data;
-            } catch (error) {
-                return error;
+
+            export default PrivateRoute;
+
+
+        - создайте компонент PublicRoute который рендерит соответсвующий публичный или ограниченный роут в зависимости от значений isAuth и isRestricted. Если значения isAuth и isRestricted равно true, то должен происходить редирект на роут '/products/phones'. Если false, то рендерится компонент.
+
+            Пример PublicRoute:
+
+            import React from "react";
+            import { Route, Redirect } from "react-router-dom";
+
+            function PublicRoute({
+            exact,
+            path,
+            isAuth,
+            component: MyComponent,
+            isRestricted,
+            icon,
+            }) {
+            return isAuth && isRestricted ? (
+                <Redirect to='/products/phones' />
+            ) : (
+                <Route
+                path={path}
+                exact={exact}
+                render={(props) => <MyComponent {...props} icon={icon} />}
+                key={path}
+                />
+            );
             }
-            };
 
+            export default PublicRoute;
 
-    3. Создание и настройка глобального стейта для регистрации (авторизации) пользователя
-            - создайте редьюсеры, необходимые для работы с данными пользователя и токеном. Добавьте его в проект
-            Пример редьюсера:
+        5. Рендер компонентов PrivateRoute и PublicRoute.
+            - В компоненте Main, в зависимости от значения isPrivate рендерить соответствующий роут. Передате компонентам проп isAuth, полученый при помощи соответствущего селектора.
 
-            import { combineReducers, createReducer } from "@reduxjs/toolkit";
-            import {
-            loginUser,
-            registerUser,
-            resetError,
-            setError,
-            setLoader,
-            } from "./authActions";
+            Пример:
 
-            const authUserReducer = createReducer(null, {
-            [registerUser]: (_, action) => action.payload,
-            [loginUser]: (_, action) => action.payload,
-            });
+            {mainRoutes.map((route) =>
+            route.isPrivate ? (
+              <PrivateRoute {...route} key={route.path} isAuth={isAuth} />
+            ) : (
+              <PublicRoute {...route} key={route.path} isAuth={isAuth} />
+            )
+          )}
 
-            const authLoaderReducer = createReducer(false, {
-            [setLoader]: (state) => !state,
-            });
-
-            const authErrorReducer = createReducer("", {
-            [setError]: (_, action) => action.payload,
-            [resetError]: () => "",
-            });
-
-            const authReducer = combineReducers({
-            user: authUserReducer,
-            loader: authLoaderReducer,
-            error: authErrorReducer,
-            });
-
-            export default authReducer;
-
-
-            - создайте экшены, которые будут вызываться при регистрации и авторизации пользователя
-
-                Пример:
-
-                import { createAction } from "@reduxjs/toolkit";
-
-                const registerUser = createAction("auth/register");
-                const loginUser = createAction("auth/login");
-                const logOut = createAction("auth/logout");
-                const setLoader = createAction("auth/setLoader");
-                const setError = createAction("auth/setError");
-                const resetError = createAction("auth/resetError");
-
-                export { registerUser, loginUser, logOut, setLoader, setError, resetError };
-
-            - создайте операции, которые будут вызывать методы оправки данных на сервер и будут производить соответствующие изменения
-            стейта в зависимости от полученного ответа.
-
-                Пример:
-
-                import { login, registration } from "../../services/auth_api";
-                import { loginUser, registerUser, setError } from "./authActions";
-
-                export const registerOperation = (user) => async (dispatch) => {
-                try {
-                    const response = await registration(user);
-                    dispatch(registerUser(response));
-                } catch (error) {
-                    dispatch(setError(error.message));
-                }
-                };
-                export const loginOperation = (user) => async (dispatch) => {
-                try {
-                    const response = await login(user);
-                    dispatch(loginUser(response));
-                } catch (error) {
-                    dispatch(setError(error.message));
-                }
-                };
-
-
-            - Проверьте работоспособность приложения.
+          - проверьте работоспособность приложения

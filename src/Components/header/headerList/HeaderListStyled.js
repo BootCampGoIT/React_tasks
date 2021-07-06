@@ -15,7 +15,8 @@ export const HeaderNavigation = styled.nav`
   .navigationListItem {
     margin-top: 10px;
   }
-  .navigationListItemAnchor {
+  .navigationListItemAnchor,
+  .logoutLink {
     text-decoration: none;
     color: #819ff5;
     text-transform: uppercase;
@@ -36,13 +37,13 @@ export const HeaderNavigation = styled.nav`
     .navigationListItem {
       margin-top: 0;
     }
-    .navigationListItemAnchor{
+    .navigationListItemAnchor,
+    .logoutLink {
       color: #819ff5;
       font-weight: 600;
     }
     .navigationListItemActive {
       color: #5f73a1;
-      
     }
 
     .navigationListItem:not(:last-child) {

@@ -8,9 +8,7 @@ import { getAllAdvByCategoryOperation } from "../../redux/products/productsOpera
 import LoaderComponent from "../loader/Loader";
 import {
   filteredProducts,
-  laptopsSelector,
   loadingSelector,
-  productsSelector,
 } from "../../redux/products/productsSelectors";
 import Filter from "../filter/Filter";
 
