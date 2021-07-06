@@ -37,6 +37,7 @@ class AuthForm extends Component {
               type='text'
               className='authFormInput'
               name='email'
+              placeholder="Example: alexIvanov@gmail.com"
               onChange={this.onHandleChange}
             />
           </label>
@@ -46,6 +47,7 @@ class AuthForm extends Component {
               type='text'
               className='authFormInput'
               name='password'
+              placeholder="Example: Qwerty123"
               onChange={this.onHandleChange}
             />
           </label>

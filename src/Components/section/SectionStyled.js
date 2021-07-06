@@ -5,10 +5,12 @@ export const SectionContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 0;
+    /* padding: 10px 0; */
     /* background-color: #312d2d; */
     border-bottom: 2px solid #819ff5;
-    padding: 10px 20px;
+    height: 40px;
+    padding-left: 20px;
+    /* padding: 10px 20px; */
   }
   .sectionTitle {
     color: #819ff5;
@@ -22,7 +24,7 @@ export const SectionContainer = styled.div`
     fill: #819ff5;
   }
   .sectionContent {
-    padding: 20px;
+    /* padding: 20px; */
     width: 100%;
   }
 
