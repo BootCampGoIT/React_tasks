@@ -11,12 +11,17 @@ export const AuthFormContainer = styled.div`
   .authForm {
     display: flex;
     flex-direction: column;
-    width: 280px;
+    align-items: center;
+    max-width: 300px;
   }
 
   .authFormLabel {
     color: #819ff5;
+    width: 280px;
     font-weight: 600;
+  }
+  .labelTitle {
+    font-size: 14px;
   }
 
   .authFormInput {
@@ -26,7 +31,6 @@ export const AuthFormContainer = styled.div`
     border-radius: 14px;
     padding-left: 10px;
     margin: 5px 0;
-
     font-size: 14px;
     outline: none;
     display: block;
@@ -37,5 +41,6 @@ export const AuthFormContainer = styled.div`
   }
   .authFormSubmitter {
     margin-top: 25px;
+    padding: 0 30px;
   }
 `;

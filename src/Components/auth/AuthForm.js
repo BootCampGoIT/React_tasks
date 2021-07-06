@@ -32,22 +32,22 @@ class AuthForm extends Component {
       <AuthFormContainer>
         <form className='authForm' onSubmit={this.onHandleSubmit}>
           <label className='authFormLabel'>
-            Email
+            <span className='labelTitle'>EMAIL</span>
             <input
               type='text'
               className='authFormInput'
               name='email'
-              placeholder="Example: alexIvanov@gmail.com"
+              placeholder='Example: alexIvanov@gmail.com'
               onChange={this.onHandleChange}
             />
           </label>
           <label className='authFormLabel'>
-            Password
+            <span className='labelTitle'>PASSWORD</span>
             <input
               type='text'
               className='authFormInput'
               name='password'
-              placeholder="Example: Qwerty123"
+              placeholder='Example: Qwerty123'
               onChange={this.onHandleChange}
             />
           </label>

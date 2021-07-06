@@ -7,11 +7,12 @@ import { isAuth } from "../../redux/auth/authSelectors";
 import { connect } from "react-redux";
 import PrivateRoute from "../../routes/PrivateRoute";
 import PublicRoute from "../../routes/PublicRoute";
+import LoaderComponent from "../loader/Loader";
 
 const Main = ({ isAuth }) => {
   return (
     <MainContainer>
-      <Suspense fallback={<h2>...loading</h2>}>
+      <Suspense fallback={<LoaderComponent />}>
         <Switch>
           {mainRoutes.map((route) =>
             route.isPrivate ? (

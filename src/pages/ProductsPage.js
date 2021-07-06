@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from "react";
 import { productsRoutes } from "../routes/productsRoutes";
 import { NavLink, Route, Switch } from "react-router-dom";
 import { ProductsPageContainer } from "./ProductsPageStyled";
-
+import LoaderComponent from "../Components/loader/Loader";
 
 const ProductsPage = ({ match, data, history }) => {
   useEffect(() => {
@@ -27,7 +27,7 @@ const ProductsPage = ({ match, data, history }) => {
             )
         )}
       </ul>
-      <Suspense fallback={<h2>...loading</h2>}>
+      <Suspense fallback={<LoaderComponent />}>
         <Switch>
           {productsRoutes.map(
             ({ name, path, exact, component: MyComponent }) => (

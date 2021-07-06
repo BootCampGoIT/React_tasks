@@ -4,6 +4,7 @@ export const AdvFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 10px 20px;
 
   .advFormLabel {
     display: flex;
