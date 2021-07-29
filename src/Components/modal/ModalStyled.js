@@ -41,3 +41,29 @@ export const ModalContainer = styled.div`
     fill: #819ff5;
   }
 `;
+
+// const state = {
+//   cart: [],
+//   products: {
+//     phones: [],
+//     laptops: [{}, {}, {}],
+//   },
+// };
+
+// const product = {
+//   name: "fghj",
+//   price: 20,
+//   description: "",
+//   isSale: true,
+//   category: "laptops", //'phones'
+//   id: "hjjkjkl",
+// };
+
+// const createNewAdv = (product) => {
+//   this.setState((prev) => ({
+//     products: {
+//       ...prev.products,
+//       [product.category]: [...prev.products[product.category], product],
+//     },
+//   }));
+// };

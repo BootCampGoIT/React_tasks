@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://reactmaps-1556023014107-default-rtdb.firebaseio.com/";
+const baseURL = "https://shopbc8-30b11-default-rtdb.firebaseio.com/";
 
 export const createNewAdv = async (category, newAdv) => {
   try {
