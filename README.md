@@ -1,4 +1,4 @@
-# lesson: "Async redux";
+# lesson: "Async redux"
 
 ## 1. Создание операций для работы с продуктами
 
