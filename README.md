@@ -15,7 +15,7 @@
   - В папке src удалите все файлы кроме двух файлов: `index.js` и `index.css`
   - Приведите содержимое файла `index.js` к следующему виду:
 
-```javascript
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -262,9 +262,10 @@ export default Main;
 ```
 
 - Содержимое компонента `PhoneList.js` должно иметь следующий вид:
+
 ```javascript
-  import React from "react";
-  import PhoneListItem from "./phoneListItem/PhoneListItem";
+import React from "react";
+import PhoneListItem from "./phoneListItem/PhoneListItem";
 
 const PhoneList = ({ phones }) => {
   return (
