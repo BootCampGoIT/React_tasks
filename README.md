@@ -108,9 +108,15 @@ onClick={this.setModalState}
 
 - для предотвращения прокрутки содержимого за компонентом добавьте:
   - при монтировании следующий код:
-  ```javascript
-  const body = document.querySelector("body");
-  body.style.overflow = "hidden"; - при размонтировании следующий код:
-  const body = document.querySelector("body");
-  body.style.overflow = "auto";
-  ```
+
+```javascript
+const body = document.querySelector("body");
+body.style.overflow = "hidden";
+```
+
+- при размонтировании следующий код:
+
+```javascript
+const body = document.querySelector("body");
+body.style.overflow = "auto";
+```
